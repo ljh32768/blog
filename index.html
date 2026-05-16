@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LJH</title>
     <style>
-        /* 极简左右分栏风格 */
+        /* 极简风格变量 */
         :root {
             --text-primary: #2c3e50;
             --text-secondary: #7f8c8d;
@@ -14,6 +14,7 @@
             --link-hover: #2c3e50;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             --avatar-size: 120px;
+            --border-color: #eaecef;
         }
 
         body {
@@ -26,18 +27,17 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 核心布局：垂直水平居中，左右排列 */
-        .container {
+        /* ==================== 首屏：个人介绍区 ==================== */
+        .hero-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 80px; /* 左右两栏的间距 */
-            min-height: 100vh; /* 占满全屏 */
+            gap: 80px;
+            min-height: 100vh; /* 占满第一屏 */
             padding: 40px 20px;
             box-sizing: border-box;
         }
 
-        /* 左侧内容区 */
         .left-content {
             max-width: 400px;
             text-align: left;
@@ -62,7 +62,7 @@
             font-weight: 500;
             transition: color 0.2s ease;
             padding: 5px 0;
-            border-bottom: 1px solid transparent; /* 底部隐形边框，防止 hover 时抖动 */
+            border-bottom: 1px solid transparent;
         }
 
         .links a:hover {
@@ -70,7 +70,6 @@
             border-bottom: 1px solid var(--link-hover);
         }
 
-        /* 右侧头像和名字区 */
         .right-profile {
             text-align: center;
         }
@@ -78,29 +77,27 @@
         .avatar-wrapper {
             width: var(--avatar-size);
             height: var(--avatar-size);
-            border-radius: 50%; /* 切成圆形 */
-            background-color: #f0f0f0; /* 占位背景色 */
-            margin: 0 auto 20px auto; /* 居中且与下方名字保持间距 */
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            margin: 0 auto 20px auto;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* 头像占位 SVG 图标 */
         .avatar-placeholder {
             width: 60%;
             height: 60%;
             fill: #cccccc;
-	    display: none;
+            display: none; /* 已隐藏占位符 */
         }
 
-        /* 真实头像样式（当你替换图片时生效） */
         .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block; /* 默认隐藏，替换后改为 display: block; */
+            display: block; /* 显示真实头像 */
         }
 
         h1 {
@@ -111,21 +108,81 @@
             color: var(--text-primary);
         }
 
-        /* 页脚 */
+        /* ==================== 下半屏：文章列表区 ==================== */
+        .articles-section {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 20px 60px; /* 底部留白 */
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--text-primary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* 文章之间的间距 */
+        }
+
+        .article-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-title {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .article-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .article-title a:hover {
+            color: var(--link-color);
+        }
+
+        .article-desc {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin: 0 0 15px 0;
+            line-height: 1.6;
+        }
+
+        .article-date {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            font-family: monospace; /* 等宽字体，极客感 */
+        }
+
+        /* ==================== 页脚 ==================== */
         footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.8em;
             opacity: 0.6;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
         }
 
-        /* 响应式：手机端改为上下布局 */
+        /* ==================== 响应式：手机端 ==================== */
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column-reverse; /* 反转排列，头像在上，文字在下 */
+            .hero-container {
+                flex-direction: column-reverse;
                 gap: 40px;
                 text-align: center;
             }
@@ -139,30 +196,57 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 左侧：文字与链接 -->
+
+    <!-- 首屏：个人介绍 -->
+    <div class="hero-container">
         <div class="left-content">
-            <p class="tagline">                                           </p>
+            <h1>欢迎来到Ljh的小站</h1>
             <div class="links">
                 <a href="https://github.com/ljh32768" target="_blank">GitHub</a>
                 <a href="mailto:ljhcom66@qq.com">Email</a>
-                <a href="#" target="_blank">Blog</a>
+                <a href="https://github.com/ljh32768/blog" target="_blank">Blog</a>
+		<a href="https://www.luogu.com.cn/user/1977552" target="_blank">Luogu</a>
             </div>
         </div>
 
-        <!-- 右侧：头像与名字 -->
         <div class="right-profile">
             <div class="avatar-wrapper">
-                <!-- 默认占位图标 -->
                 <svg class="avatar-placeholder" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
-                <!-- 真实头像位置（替换图片后使用） -->
                 <img class="avatar-img" src="a.png" alt="LJH">
             </div>
             <h1>LJH</h1>
         </div>
     </div>
+
+    <!-- 下半屏：文章列表 -->
+    <section class="articles-section">
+        <h2 class="section-title">文章列表</h2>
+        
+        <div class="article-list">
+            <!-- 文章 1 -->
+            <div class="article-item">
+                <h3 class="article-title"><a href=".\_layouts\从零开始：纯 HTML 极简主页搭建指南.html">从零开始：纯 HTML 极简主页搭建指南</a></h3>
+                <p class="article-desc">不需要 Jekyll，不需要后端，只需一个 index.html 文件和 GitHub Pages，十分钟搭建属于你的高逼格个人主页。</p>
+                <span class="article-date">2026-5-09</span>
+            </div>
+
+            <!-- 文章 2 -->
+            <div class="article-item">
+                <h3 class="article-title"><a href=".\_layouts\白嫖甲骨文云：永久免费 ARM 服务器申请攻略.html">白嫖甲骨文云：永久免费 ARM 服务器申请攻略</a></h3>
+                <p class="article-desc">详细记录了申请 Oracle Cloud Always Free Tier 的全过程，以及如何避免账号被封和防回收的实用技巧。</p>
+                <span class="article-date">2026-5-09</span>
+            </div>
+
+            <!-- 文章 3 -->
+            <div class="article-item">
+                <h3 class="article-title"><a href=".\_layouts\前端安全科普：为什么纯静态页面的密码验证是自欺欺人？.html">前端安全科普：为什么纯静态页面的密码验证是自欺欺人？</a></h3>
+                <p class="article-desc">探讨了在 GitHub Pages 这种纯静态环境下，为什么前端密码验证不安全，以及使用哈希加密的正确姿势。</p>
+                <span class="article-date">2026-5-09</span>
+            </div>
+        </div>
+    </section>
 
     <footer>
         © 2026 LJH
