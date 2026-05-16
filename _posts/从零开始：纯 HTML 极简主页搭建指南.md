@@ -20,9 +20,11 @@
 2. 本地任意一个**文本编辑器**（VS Code、Sublime、记事本都可以）。
 3. 愿意动手的心态。
 
+[1]: https://github.com
+
 ---
 
-## 创建你的第一个 index.html
+## 第一步：创建你的第一个 index.html
 
 在你的电脑上新建一个文件夹，比如 `my-homepage`，在里面创建一个文件 `index.html`，用编辑器打开。
 
@@ -142,4 +144,3 @@
     </div>
 </body>
 </html>
-```
