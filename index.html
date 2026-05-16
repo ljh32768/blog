@@ -3,40 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人网站</title>
+    <title>LJH</title>
     <style>
+        /* 极简左右分栏风格 */
+        :root {
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --bg-color: #ffffff;
+            --link-color: #3498db;
+            --link-hover: #2c3e50;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            --avatar-size: 120px;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
-        header {
-            background-color: #35424a;
-            color: #ffffff;
-            padding: 20px;
+
+        /* 核心布局：垂直水平居中，左右排列 */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px; /* 左右两栏的间距 */
+            min-height: 100vh; /* 占满全屏 */
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* 左侧内容区 */
+        .left-content {
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .tagline {
+            color: var(--text-secondary);
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 5px 0;
+            border-bottom: 1px solid transparent; /* 底部隐形边框，防止 hover 时抖动 */
+        }
+
+        .links a:hover {
+            color: var(--link-hover);
+            border-bottom: 1px solid var(--link-hover);
+        }
+
+        /* 右侧头像和名字区 */
+        .right-profile {
             text-align: center;
         }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            background: #fff;
-            margin-top: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+        .avatar-wrapper {
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+            border-radius: 50%; /* 切成圆形 */
+            background-color: #f0f0f0; /* 占位背景色 */
+            margin: 0 auto 20px auto; /* 居中且与下方名字保持间距 */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 头像占位 SVG 图标 */
+        .avatar-placeholder {
+            width: 60%;
+            height: 60%;
+            fill: #cccccc;
+	    display: none;
+        }
+
+        /* 真实头像样式（当你替换图片时生效） */
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block; /* 默认隐藏，替换后改为 display: block; */
+        }
+
+        h1 {
+            font-size: 2em;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+        }
+
+        /* 页脚 */
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.8em;
+            opacity: 0.6;
+        }
+
+        /* 响应式：手机端改为上下布局 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column-reverse; /* 反转排列，头像在上，文字在下 */
+                gap: 40px;
+                text-align: center;
+            }
+            .left-content {
+                text-align: center;
+            }
+            .links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>欢迎来到Ljh的零成本网站！</h1>
-    </header>
     <div class="container">
-        <h2>关于我</h2>
-        <p>这是一个完全用 HTML 写的网页，没有使用任何 Jekyll 主题。</p>
-        <p>我可以在这里随意写任何我想展示的内容。</p>
+        <!-- 左侧：文字与链接 -->
+        <div class="left-content">
+            <p class="tagline">                                           </p>
+            <div class="links">
+                <a href="https://github.com/ljh32768" target="_blank">GitHub</a>
+                <a href="mailto:ljhcom66@qq.com">Email</a>
+                <a href="#" target="_blank">Blog</a>
+            </div>
+        </div>
+
+        <!-- 右侧：头像与名字 -->
+        <div class="right-profile">
+            <div class="avatar-wrapper">
+                <!-- 默认占位图标 -->
+                <svg class="avatar-placeholder" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <!-- 真实头像位置（替换图片后使用） -->
+                <img class="avatar-img" src="a.png" alt="LJH">
+            </div>
+            <h1>LJH</h1>
+        </div>
     </div>
+
+    <footer>
+        © 2026 LJH
+    </footer>
 </body>
 </html>
